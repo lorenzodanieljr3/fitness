@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Loan
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('loan') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <h4>Input Amount for Loan</h4>
+                <h5>Must be a positive integer no more than 1000</h5>
+                <input autocomplete="off" autofocus class="form-control" name="loan" placeholder="Loan amount" type="integers"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Loan</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

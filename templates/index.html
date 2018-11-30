@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for line in data %}
+              <tr>
+                  <td>{{ line.symbol }}</td>
+                  <td>{{ line.sum }}</td>
+                  <td>{{ line.price|usd}}</td>
+                  <td>{{ line.total|usd}}</td>
+              </tr>
+          {% endfor %}
+          <tr>
+            <td>Cash Total</td>
+            <td></td>
+            <td></td>
+            <td>{{Money}}</td>
+          </tr>
+          <tr>
+            <td>Grand Total</td>
+            <td></td>
+            <td></td>
+            <td>{{GrandTotal}}</td>
+          </tr>
+      </tbody>
+  </table>
+{% endblock %}
