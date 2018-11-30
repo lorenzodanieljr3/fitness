@@ -8,7 +8,7 @@ from functools import wraps
 def apology(message, code=400):
     """Render message as an apology to user."""
     def escape(s):
-        "YERRRRR""
+        """
         Escape special characters.
 
         https://github.com/jacebrowning/memegen#special-characters

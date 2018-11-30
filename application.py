@@ -43,104 +43,88 @@ db = SQL("sqlite:///fitness.db")
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
+    """Show list of workouts"""
 
     user = session["user_id"]
 
-    data = db.execute("SELECT symbol FROM purchases WHERE purchaser=:current GROUP BY symbol", current=user)
+    data = db.execute("SELECT * FROM users WHERE id=:current", current=user)
 
-    summed = db.execute("SELECT symbol, SUM(shares) FROM purchases WHERE purchaser=:current GROUP BY symbol", current=user)
-
-    index = 0
-    counter = 0
 
     for line in data:
-        look = lookup(line["symbol"])
-        line["sum"] = summed[index]["SUM(shares)"]
-        line["symbol"] = look["symbol"]
-        line["price"] = (look["price"])
-        line["total"] = (line["price"] * line["sum"])
-        counter += (line["price"] * line["sum"])
-        index = index + 1
+        # line["name"] = name
 
-    cash = db.execute("SELECT cash FROM users WHERE id=:login_id", login_id=session["user_id"])
-    money = cash[0]["cash"]
-
-    grandtotal = money + counter
-    GrandTotal = usd(grandtotal)
-    Money = usd(money)
-
-    return render_template("index.html", data=data, Money=Money, GrandTotal=GrandTotal)
+    # Render portfolio
+        return render_template("index.html")
 
 
-@app.route("/buy", methods=["GET", "POST"])
-@login_required
-def buy():
-    """Buy shares of stock"""
-    if request.method == "POST":
-        # check if valid input
-        try:
-            symbol = lookup(request.form.get("symbol"))
-            shares = int(request.form.get("shares"))
-        except:
-            return apology("enter some input")
+# @app.route("/buy", methods=["GET", "POST"])
+# @login_required
+# def buy():
+#     """Buy shares of stock"""
+#     if request.method == "POST":
+#         # check if valid input
+#         try:
+#             symbol = lookup(request.form.get("symbol"))
+#             shares = int(request.form.get("shares"))
+#         except:
+#             return apology("enter some input")
 
-        # if symbol is empty return apology
-        if not symbol:
-            return apology("enter a valid symbol")
+#         # if symbol is empty return apology
+#         if not symbol:
+#             return apology("enter a valid symbol")
 
-        # if shares is empty
-        if not shares or shares <= 0:
-            return apology("enter the quantity of shares")
+#         # if shares is empty
+#         if not shares or shares <= 0:
+#             return apology("enter the quantity of shares")
 
-        # if can't afford to buy then error
-        # get cash from db
-        total_amount = (shares) * symbol["price"]
-        current_user_amount = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
-        remainder = current_user_amount[0]["cash"] - total_amount
-        typeoftransaction = "BUY"
+#         # if can't afford to buy then error
+#         # get cash from db
+#         total_amount = (shares) * symbol["price"]
+#         current_user_amount = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
+#         remainder = current_user_amount[0]["cash"] - total_amount
+#         typeoftransaction = "BUY"
 
-        if remainder < 0:
-            return apology("Not enough money")
-        else:
-            db.execute("UPDATE users SET cash = :remainder WHERE id = :id", id=session["user_id"], remainder=remainder)
+#         if remainder < 0:
+#             return apology("Not enough money")
+#         else:
+#             db.execute("UPDATE users SET cash = :remainder WHERE id = :id", id=session["user_id"], remainder=remainder)
 
-            db.execute("""INSERT INTO purchases (purchaser, symbol, shares, price_of_stock, total_purchase_price, typeoftransaction)
-                VALUES(:purchaser, :symbol, :shares, :price_of_stock, :total_purchase_price, :typeoftransaction)""",
-                       purchaser=session["user_id"], symbol=symbol["symbol"], shares=shares, price_of_stock=symbol["price"], total_purchase_price=total_amount, typeoftransaction=typeoftransaction)
+#             db.execute("""INSERT INTO purchases (purchaser, symbol, shares, price_of_stock, total_purchase_price, typeoftransaction)
+#                 VALUES(:purchaser, :symbol, :shares, :price_of_stock, :total_purchase_price, :typeoftransaction)""",
+#                       purchaser=session["user_id"], symbol=symbol["symbol"], shares=shares, price_of_stock=symbol["price"], total_purchase_price=total_amount, typeoftransaction=typeoftransaction)
 
-        flash("Bought!")
+#         flash("Bought!")
 
-        return redirect(url_for("index"))
+#         return redirect(url_for("index"))
 
-    else:
-        return render_template("buy.html")
-
-
-@app.route("/check", methods=["GET"])
-def check():
-    """Return true if username available, else false, in JSON format"""
-    check = request.args.get("username")
-    look = db.execute("SELECT * FROM users WHERE username =:current", current=check)
-    if not len(check) or look:
-        return jsonify(False)
-    else:
-        return jsonify(True)
+#     else:
+#         return render_template("buy.html")
 
 
-@app.route("/history")
-@login_required
-def history():
-    """Show history of transactions"""
+# @app.route("/check", methods=["GET"])
+# def check():
+#     """Return true if username available, else false, in JSON format"""
+#     check = request.args.get("username")
+#     look = db.execute("SELECT * FROM users WHERE username =:current", current=check)
+#     if not len(check) or look:
+#         return jsonify(False)
+#     else:
+#         return jsonify(True)
 
-    currentuser = session["user_id"]
 
-    data = db.execute("SELECT * FROM purchases WHERE purchaser=:current", current=currentuser)
+# @app.route("/history")
+# @login_required
+# def history():
+#     """Show history of transactions"""
 
-    for line in data:
-        line["price"] = usd(line["price_of_stock"])
+#     currentuser = session["user_id"]
 
-    return render_template("history.html", data=data)
+#     data = db.execute("SELECT * FROM purchases WHERE purchaser=:current", current=currentuser)
+
+#     for line in data:
+#         line["price"] = usd(line["price_of_stock"])
+
+#     return render_template("history.html", data=data)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -240,7 +224,7 @@ def register():
         # store their id in session to log them in automatically
         user_id = db.execute("SELECT id FROM users WHERE username = :username", username=request.form.get("username"))
         session["user_id"] = user_id[0]["id"]
-        return redirect(url_for("index"))
+        return redirect("workout.html")
 
     else:
         return render_template("register.html")
@@ -330,11 +314,3 @@ def loan():
         return render_template("loan.html")
 
 
-def errorhandler(e):
-    """Handle error"""
-    return apology(e.name, e.code)
-
-
- # listen for errors
-for code in default_exceptions:
-    app.errorhandler(code)(errorhandler)
