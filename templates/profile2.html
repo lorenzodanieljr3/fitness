@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+<head>
+<link href="/static/profile.css" rel="stylesheet">
+<link href="/static/home.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" ></script>
+
+
+<h1>Customize Your Profile</h1>
+<br>
+    <form action="/profile">
+        <fieldset>
+
+            <style>
+            input[type=text], select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            input[type=submit] {
+                width: 100%;
+                background-color: #f1f1f1;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #f1f1f1;
+            }
+            select {
+                width: 100%;
+                padding: 16px 20px;
+                border: none;
+                border-radius: 4px;
+                background-color: white;
+                }
+            </style>
+
+                <h4>Select your height</h4>
+                <div align="center">
+                <select name="height">
+                <option value="height"></option>
+                <option value="height">5'</option>
+                <option value="height">5'1"</option>
+                <option value="height">5'2"</option>
+                </select>
+                </div>
+
+                <h4>Enter your height</h4>
+                <input type="text" placeholder="Height" name="height">
+
+                <h4>Enter your weight (lbs)</h4>
+                <input type="text" placeholder="Weight" name="weight">
+
+                <h4>Select Your Gender</h4>
+                  <div>
+                    <input type="radio" name="gender" value="male" id="male">
+                    <label for="male">male</label>
+                  </div>
+                  <div>
+                    <input type="radio" name="gender" value="female" id="female">
+                    <label for="female">female</label>
+                  </div>
+                  <div>
+                    <input type="radio" name="gender" value="other" id="other">
+                    <label for="other">other</label>
+                  </div>
+
+                <h4>What's your goal?</h4>
+               <div align="center">
+                <select name="goal">
+                <option value="goal"></option>
+                <option value="goal">Gain Muscle</option>
+                <option value="goal">Lose Weight</option>
+                <option value="goal">Neither</option>
+                <option value="goal">Not Sure</option>
+                </select>
+
+                <button class="btn btn-xl" type="submit" onClick="shift()";> Submit </button>
+
+
+<script>
+    function shift() {
+
+    if (document.getElementById("male").checked == true) {
+        window.location = "/workout1";
+    }
+    else if (document.getElementById("female").checked == true) {
+        window.location = "/workout2";
+    }
+    }
+</script>
+
+{% endblock %}

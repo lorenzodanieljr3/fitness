@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Workout
+{% endblock %}
+
+{% block main %}
+<link href="/static/log.css" rel="stylesheet">
+<!--<link href="/static/workout.css" rel="stylesheet">-->
+
+  <h2>Workout Log</h2>
+
+<table class="table table-dark">
+    <tr>
+        <th>Workout Name</th>
+        <th>Type</th>
+        <th>Distance (mi)</th>
+        <th>Duration (mins)</th>
+        <th>Date/Time</th>
+    </tr>
+
+    {% for athlete in athletes %}
+    <tr>
+        <td>{{athlete[0]}}</td>
+        <td>{{athlete[1]}}</td>
+        <td>{{athlete[2]}}</td>
+        <td>{{athlete[3]}}</td>
+        <td>{{athlete[4]}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<br><br><br>
+
+<h4>
+      Worked out lately? Click the link to below to add a workout. <br>
+    <a href="/workout">Add a workout</h4></a><br><br>
+
+  <h4>
+      Need a workout? Take a look at some of our suggested workouts to get started! <br><br>
+    <a href="/workouta">Suggested Workout A<br></a>
+    <a href="/workoutb">Suggested Workout B</h4></a><br>
+
+  {% endblock %}

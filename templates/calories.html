@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calculator
+{% endblock %}
+
+{% block main %}
+
+<link href="/static/calculator.css" rel="stylesheet">
+
+<body style="background-color:lightgrey;">
+
+<div id="content"><div class="smalltext smtbtop"><a href="/">Home</a> / <a href="/fitness-and-health-calculator.html">Fitness and Health Calculators</a> / <a href="/calorie-calculator.html">Calorie Calculator</a></div><div id="printit"><a href="#" onclick="document.calform.printit.value=1;document.calform.submit();return false;">Print</a></div>		<h1>Calorie Calculator</h1>
+<p>The <i>Calorie Calculator</i> can be used to estimate the number of calories a person needs to consume each day. This calculator can also provide some simple guidelines for gaining or losing weight. Use the "metric units" tab if the International System of Units (SI) is preferred.</p><div id="insmdc"><img src="//d26tpo4cm8sb6k.cloudfront.net/img/svg/insm.svg"></div><span id="ucframe"></span>
+<div id="topmenu"><ul><li id="menuon"><a href="#" onclick="popMenu('standard',1);">US Units</a></li> <li><a href="#" onclick="popMenu('metric',1);">Metric Units</a></li> <li><a href="#" onclick="popMenu('other');">Other Units</a></li></ul></div>
+
+<div class="panel2" style="padding:10px;">
+<table id="calinputtable" width="420">
+<form action="calorie-calculator.html" name="calform"></form>
+<input type="hidden" name="ctype" id="ctype" value="standard">
+<tbody><tr>
+	<td width="50">Age</td>
+	<td width="370"><input type="text" name="cage" id="cage" value="25" class="infull" onkeyup="iptfieldCheck(this, 'r', 'pn');"></td>
+</tr>
+<tr>
+	<td>Gender</td>
+	<td><label for="csex1" class="cbcontainer"><input type="radio" name="csex" id="csex1" value="m" checked=""><span class="rbmark"></span> male</label> &nbsp; <label for="csex2" class="cbcontainer"><input type="radio" name="csex" id="csex2" value="f"><span class="rbmark"></span> female</label></td>
+</tr>
+</tbody></table>
+<table width="420" id="standardheightweight" style="display: block;">
+<tbody><tr>
+	<td width="50">Height</td>
+	<td width="370">
+		<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td>
+			<input type="text" name="cheightfeet" id="cheightfeet" value="5" class="inhalf inuifoot" onkeyup="iptfieldCheck(this, '', 'pzn');"><span class="inuifootspan">feet</span>
+		</td><td>&nbsp;</td><td>
+			<input type="text" name="cheightinch" id="cheightinch" value="10" class="inhalf inuiinch" onkeyup="iptfieldCheck(this, '', 'pzn');"><span class="inuiinchspan">inches</span>
+		</td></tr></tbody></table>
+	</td>
+</tr>
+<tr>
+	<td>Weight</td>
+	<td><input type="text" name="cpound" id="cpound" value="160" class="infull inuipound" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuipoundspan">pounds</span></td>
+</tr>
+</tbody></table>
+<table width="420" id="metricheightweight" style="display: none;">
+<tbody><tr>
+	<td width="50">Height</td>
+	<td width="370"><input type="text" name="cheightmeter" id="cheightmeter" value="180" class="infull inuick" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuickspan">cm</span></td>
+</tr>
+<tr id="metricweight">
+	<td>Weight</td>
+	<td><input type="text" name="ckg" id="ckg" value="60" class="infull inuick" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuickspan">kg</span></td>
+</tr>
+</tbody></table>
+<table width="500">
+<tbody><tr>
+	<td width="50">Activity</td>
+	<td width="450">
+		<select id="cactivity" name="cactivity">
+			<option value="1">Basal Metabolic Rate (BMR)</option>
+			<option value="1.2">Sedentary - little or no exercise</option>
+			<option value="1.375" selected="">Lightly Active - exercise/sports 1-3 times/week</option>
+			<option value="1.55">Moderately Active - exercise/sports 3-5 times/week</option>
+			<option value="1.725">Very Active - hard exercise/sports 6-7 times/week</option>
+			<option value="1.9">Extra Active - very hard exercise/sports or physical job</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td width="50">&nbsp;</td>
+	<td width="450"><input name="printit" value="0" type="hidden"><input type="image" src="//d26tpo4cm8sb6k.cloudfront.net/img/svg/calculate.svg" value="Calculate" alt="Calculate"></td>
+</tr>
+
+</tbody></table>
+</div>
+<p><table><tbody><tr valign="top"><td>You need <font color="green"><b>2,361</b></font> Calories/day to maintain your weight.</td><td><div style="width:140px;display:block;background-color:#023775;text-align:right;color:#fff;">2,361</div></td></tr><tr valign="top"><td>You need <b>1,861</b> Calories/day to lose 1 lb per week.</td><td><div style="width:111px;display:block;background-color:#aa4643;text-align:right;color:#fff;">1,861</div></td></tr><tr valign="top"><td>You need <b>1,361</b> Calories/day to lose 2 lb per week.</td><td><div style="width:81px;display:block;background-color:#7a0401;text-align:right;color:#fff;">1,361</div></td></tr><tr valign="top"><td>You need <b>2,861</b> Calories/day to gain 1 lb per week.</td><td><div style="width:170px;display:block;background-color:#89a54e;text-align:right;color:#fff;">2,861</div></td></tr><tr valign="top"><td>You need <b>3,361</b> Calories/day to gain 2 lb per week.</td><td><div style="width:200px;display:block;background-color:#517011;text-align:right;color:#fff;">3,361</div></td></tr></tbody></table></p><script>
+function popMenu(inval, insubmit){
+	htmlVal = "";
+	if (inval == "metric"){
+		htmlVal = htmlVal + "<li><a href=\"#\" onclick=\"popMenu('standard',1);\">US Units</a></li> <li id='menuon'><a href=\"#\" onclick=\"popMenu('metric',1);\">Metric Units</a></li> <li><a href=\"#\" onclick=\"popMenu('other');\">Other Units</a></li>";
+		gObj("ctype").value="metric";
+		gObj("standardheightweight").style.display = 'none';
+		gObj("metricheightweight").style.display = 'block';
+		htmlVal = "<ul>" + htmlVal + "</ul>";
+		gObj("ucframe").innerHTML ="";
+		if (insubmit==1) document.calform.submit();
+	}else if (inval == "standard"){
+		htmlVal = htmlVal + "<li id='menuon'><a href=\"#\" onclick=\"popMenu('standard',1);\">US Units</a></li> <li><a href=\"#\" onclick=\"popMenu('metric',1);\">Metric Units</a></li> <li><a href=\"#\" onclick=\"popMenu('other');\">Other Units</a></li>";
+		gObj("ctype").value="standard";
+		gObj("standardheightweight").style.display = 'block';
+		gObj("metricheightweight").style.display = 'none';
+		htmlVal = "<ul>" + htmlVal + "</ul>";
+		gObj("ucframe").innerHTML ="";
+		if (insubmit==1) document.calform.submit();
+	}else{
+		htmlVal = gObj("topmenu").innerHTML ;
+		gObj("ucframe").innerHTML = "<iframe src=\"/converter/converter.php?type=\" style=\"overflow:hidden;width:100%\" width=\"100%\" height=\"238\" frameborder=\"NO\" scrolling=\"NO\" allowTransparency=\"true\" ></IFRAME>";
+	}
+	gObj("topmenu").innerHTML = htmlVal;
+}
+popMenu("standard",0);
+</script>
+
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-3068863-11']);
+_gaq.push(['_trackPageview','/calorie-calculator.html_____Section_2_US__do']);
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+})();
+</script>
+
+{% endblock %}

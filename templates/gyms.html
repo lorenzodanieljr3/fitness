@@ -4,15 +4,20 @@
     Gyms
 {% endblock %}
 {% block main %}
+<link href="/static/home.css" rel="stylesheet">
+<link href="/static/gyms.css" rel="stylesheet">
 
-        <form action="{{ url_for('gyms') }}" method="post">
-            <div class="form-group">
-                    <h4>Search Gyms Nearby</h4>
-                    <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">Search</button>
-            </div>
-        </form>
+    <h1>Nearby Gyms</h1>
+    <h3>Enter a location below to find the nearest gyms</h3>
+
+  <form action="/gyms" method="post">
+  <input autocomplete="off" class="form-control" name="city" placeholder="Location" type="text" id="city">
+
+  <center><button class="btn btn-primary" type="submit">Search </button><br><br>
+
+
+<iframe class="chall" width="950" height="650" frameborder="0" style="border:5" src="{{ googlemap }}" allowfullscreen></iframe>
+
+
 
 {% endblock %}

@@ -1,0 +1,382 @@
+/* Index
+- Shadows
+- Gradients
+*/
+/************** Mixins ***************/
+/* box-shadow Style - same for all usage */
+/* Inner Shadow */
+/* Gives text shadow to all browsers except IE*/
+/* Gives linear gradient background with no stops on all browsers,
+just one color at the top going to another color at the bottom,
+assuming bottom color is the darker color the background color is
+set for older browsers that can't handle it. */
+/* linear gradient with 4 colors */
+/* Transitions */
+/* Site Color */
+/* Breakpoints */
+@font-face {
+  font-family: 'Armour';
+  src: url("/prod/public/fonts/ARMOURCd_W_Rg.47b76c71d1f4.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Armour';
+  src: url("/prod/public/fonts/ARMOURCd_W_Md.5ad7d8529737.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/******************
+Default Site Variables
+*******************/
+/* Vertical Rhythm */
+/* Image Paths */
+/* Body Styles */
+/* Links */
+/* Typography */
+/* Sprite Path */
+/* Header Variables */
+/* Navigation Styles */
+/* Subnav */
+/* Forms */
+/* Row Top - Page Background */
+/* Site Wide Utility Styles */
+/* Footer Styles */
+#bmi_calculator, #calorie_calculator {
+  border: 1px solid #c3c2c2;
+  background: #fbf9f9;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f6f4f4), to(#fbf9f9));
+  background: -webkit-linear-gradient(top, #f6f4f4 0, #fbf9f9 100%);
+  background: linear-gradient(to bottom, #f6f4f4 0, #fbf9f9 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF6F4F4',endColorstr='#FFFBF9F9');
+  padding: 0 !important;
+}
+
+#bmi_calculator form, #calorie_calculator form {
+  float: left;
+  width: 390px;
+  border-right: 1px solid #c3c2c2;
+}
+
+#bmi_calculator form fieldset, #calorie_calculator form fieldset {
+  border-bottom: 1px solid #c3c2c2;
+  border-top: 1px solid #fff;
+  padding: 18px 0 18px 20px;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+#bmi_calculator form fieldset strong, #calorie_calculator form fieldset strong {
+  font-weight: 400;
+}
+
+#bmi_calculator form fieldset label, #calorie_calculator form fieldset label {
+  display: inline-block;
+  font-size: 15px;
+}
+
+#bmi_calculator form fieldset:last-child, #calorie_calculator form fieldset:last-child {
+  border-bottom: 0;
+}
+
+#bmi_calculator form .units input, #calorie_calculator form .units input {
+  margin-right: 3px;
+  margin-left: 15px;
+  vertical-align: text-top;
+}
+
+#bmi_calculator form .duration input, #calorie_calculator form .duration input {
+  width: 60px;
+}
+
+#bmi_calculator form .metrics strong, #calorie_calculator form .metrics strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#bmi_calculator form .metrics abbr, #calorie_calculator form .metrics abbr {
+  margin-right: 10px;
+}
+
+#bmi_calculator form .metrics .one, #bmi_calculator form .metrics .two, #bmi_calculator form .metrics .three, #calorie_calculator form .metrics .one, #calorie_calculator form .metrics .two, #calorie_calculator form .metrics .three {
+  float: left;
+}
+
+#bmi_calculator form .metrics .one, #calorie_calculator form .metrics .one {
+  margin-right: 20px;
+}
+
+#bmi_calculator form .metrics .one input, #calorie_calculator form .metrics .one input {
+  width: 107px;
+}
+
+#bmi_calculator form .metrics .two input, #calorie_calculator form .metrics .two input {
+  width: 64px;
+}
+
+#bmi_calculator form .metrics .three, #calorie_calculator form .metrics .three {
+  margin-left: 20px;
+}
+
+#bmi_calculator form .metrics .three input, #calorie_calculator form .metrics .three input {
+  width: 64px;
+}
+
+#bmi_calculator table, #calorie_calculator table {
+  border-left: 1px solid #fff;
+  width: 225px;
+}
+
+#bmi_calculator table thead, #calorie_calculator table thead {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+#bmi_calculator table thead tr th, #calorie_calculator table thead tr th {
+  padding: 20px;
+}
+
+#bmi_calculator table tbody tr td, #calorie_calculator table tbody tr td {
+  font-size: 12px;
+}
+
+#bmi_calculator table tbody tr td.category, #calorie_calculator table tbody tr td.category {
+  font-weight: 600;
+  padding-left: 20px;
+  padding-bottom: 6px;
+}
+
+#bmi_results {
+  padding: 15px 11px 0;
+}
+
+#bmi_result_container {
+  padding: 4px 10px;
+}
+
+#workout_calculator_results {
+  padding: 30px 0 0 20px;
+}
+
+#workout_calculator_results .result {
+  font-weight: 300;
+  font-size: 50px;
+}
+
+#workout_calculator_results .text {
+  font-weight: 400;
+}
+
+#calorie_calculator form {
+  width: 100%;
+}
+
+.calculator {
+  display: block;
+  width: 360px;
+  border: 1px solid #e2e2e2;
+  background: #FFFFFF;
+  -webkit-box-shadow: 2px 2px 2px #c7c7c7;
+          box-shadow: 2px 2px 2px #c7c7c7;
+}
+
+#bmi_bar_container {
+  width: 314px;
+  position: relative;
+}
+
+#bmi_bar_container #marker {
+  position: absolute;
+  top: 2px;
+  left: 139px;
+}
+
+#bmi_graph {
+  width: 100%;
+  position: relative;
+}
+
+#bmi_graph div {
+  height: 50px;
+  float: left;
+  color: white;
+}
+
+/*    using a 3.75 factor for widths (based on 90% leftover)
+Category                BMI range       Range Size  Width       Left (previous left + previous width)
+Severely underweight    0 - 16.0        16          5%          0
+Underweight	            16.0 - 18.5     2.5         9%          5%
+Normal	                18.5 - 25       6.5         24%         14%
+Overweight	            25 - 30         5           19%         38%
+Obese Class I	        30 - 35         5           19%         57%
+Obese Class II	        35 - 40         5           19%         76%
+Obese Class III	        40 - 50 (40+)   (leftovers) 5%          95%
+
+Source: http://en.wikipedia.org/wiki/Body_mass_index
+*/
+#severely_underweight {
+  width: 5%;
+  left: 0;
+  background-color: red;
+}
+
+#underweight {
+  width: 9%;
+  left: 5%;
+  background-color: salmon;
+}
+
+#normal {
+  width: 24%;
+  left: 14%;
+  background-color: mistyrose;
+}
+
+#overweight {
+  width: 19%;
+  left: 38%;
+  background-color: pink;
+}
+
+#obese_class_1 {
+  width: 19%;
+  left: 57%;
+  background-color: salmon;
+}
+
+#obese_class_2 {
+  width: 19%;
+  left: 76%;
+  background-color: red;
+}
+
+#obese_class_3 {
+  width: 5%;
+  left: 95%;
+  background-color: maroon;
+}
+
+/* END BMI CALCULATOR */
+/* Workout specific */
+fieldset.duration input {
+  width: 50px !important;
+}
+
+#activity select {
+  display: block;
+  margin-left: 79px;
+  width: 200px;
+}
+
+#workout_cal_form .error {
+  margin-right: 25px;
+}
+
+#workout_cal_form select.error {
+  margin-left: 79px;
+}
+
+#workout_height_small {
+  margin-left: 10px;
+}
+
+#workout_cal_calc_results {
+  display: block;
+  font-weight: bold;
+  margin-left: 79px;
+  border-width: 1px 2px 2px 1px;
+  border-top-color: #ddd;
+  border-right-color: #cfcfcf;
+  border-bottom-color: #cfcfcf;
+  border-left-color: #ddd;
+  border-style: solid;
+  background-color: #f5f5f5;
+  background: -webkit-gradient(linear, , from(white), color-stop(33%, #eeeeee));
+  background: -webkit-linear-gradient(center top, white 0%, #eeeeee 33%);
+  background: linear-gradient(center top, white 0%, #eeeeee 33%);
+  padding: 5px;
+  position: relative;
+}
+
+#workout_cal_calc_results span.result {
+  -webkit-box-shadow: inset 2px 2px 3px #AAA;
+          box-shadow: inset 2px 2px 3px #AAA;
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #999;
+  min-height: 12px;
+  width: 50px;
+  text-align: center;
+}
+
+#workout_cal_calc_results span.text {
+  position: absolute;
+  left: 80px;
+  top: 13px;
+}
+
+#workout_calculate {
+  margin: 15px 0 15px 79px !important;
+}
+
+#workout_activity_type {
+  display: block;
+  margin-left: 79px !important;
+  margin-top: 3px !important;
+  width: 200px !important;
+}
+
+.suggest {
+  display: none;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 203px;
+  margin-left: 79px;
+  border: 1px solid #ccc;
+  padding: 2px;
+  background-color: white;
+}
+
+.suggest li {
+  display: block;
+  padding: 2px 0;
+}
+
+.suggest li:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.suggest .hide {
+  display: none;
+}
+
+.suggest .selected {
+  background-color: #999;
+}
+
+.suggest .message {
+  color: #333;
+}
+
+/* End workout specific */
+.download_the_app {
+  padding: 20px 0;
+}
+
+@media only screen and (max-width: 767px) {
+  #page_content {
+    margin: 0 30px;
+  }
+  .responsive  h1 {
+    height: inherit;
+  }
+  #bmi_calculator form, #calorie_calculator form {
+    border-right: 0 none;
+    width: inherit;
+  }
+}

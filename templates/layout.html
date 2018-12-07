@@ -3,7 +3,7 @@
 <html lang="en">
 
     <head>
-
+    <body style="background-color:lightgrey;">
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
         <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+        <!-- https://favicon.io/emoji-favicons/person-lifting-weights/ -->
         <link href="/static/favicon.ico" rel="icon">
 
         <link href="/static/styles.css" rel="stylesheet">
@@ -26,23 +26,68 @@
 
     <body>
 
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+     <!--Bootstrap Core CSS-->
+    <!--<link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!-- Custom Fonts -->
+    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <!--<link href="static/home.css" rel="stylesheet">-->
+
         <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/"><span class="red">Chart</span><span class="lightgrey">My</span><span class="red">Fitness</span></a>
+            <a class="navbar-brand" href="/"><span class="black">Chart</span><span class="yellow">My</span><span class="black">Fitness</span></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 {% if session.user_id %}
                     <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/quote">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/buy">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/sell">Gyms</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/history">Progress</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
-                    </ul>
+                <!--<body id="page-top" class="index">-->
+
+                    <!-- Navigation -->
+                <!--    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">-->
+                <!--        <div class="container">-->
+                <!--            </div>-->
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                <!--            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+                <!--                <ul class="nav navbar-nav navbar-right">-->
+                <!--                    <li class="hidden">-->
+                <!--                        <a href="#page-top"></a>-->
+                <!--                    </li>-->
+                                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home#services">Services</a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home#team">The Team</a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home#contact">Contact Us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/gyms">Nearby Gyms</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/guide">Fitness Guide</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                                    <!--<li class="nav-item"><a class="nav-link" href="/about">About</a></li>-->
+                                    <li class="nav-item"><a class="nav-link" href="/log">Workout Log</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/workout">Add a Workout</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/challenge">Challenges</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                                </ul>
+                            </div>
+                            <!-- /.navbar-collapse -->
+                        </div>
+                        <!-- /.container-fluid -->
+                    </nav>
+
                 {% else %}
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
@@ -65,7 +110,7 @@
         </main>
 
         <footer class="small text-center text-muted">
-            Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>.
+            Data provided for free by ChartMyFitness</a>. View <a href="https://iextrading.com/api-exhibit-a/">ChartMyFitness' Terms of Use</a>.
         </footer>
 
     </body>

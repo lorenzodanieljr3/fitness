@@ -1,0 +1,48 @@
+@media (min-width: 768px) {
+  .navbar-custom.affix {
+    background-color: #222222;
+    padding: 10px 0;
+  }
+  .navbar-custom.affix .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+header {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: 100%;
+  text-align: center;
+  color: black;
+}
+header .intro-text {
+  padding-bottom: 20px;
+}
+header .intro-text .intro-lead-in {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-style: italic;*/
+  font-size: 60px;
+  line-height: 60px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+header .intro-text .intro-heading {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*text-transform: uppercase;*/
+  font-weight: 200;
+  font-size: 25px;
+  line-height: 30px;
+  margin-bottom: 25px;
+}
+
+body .body {
+  font-size: 25px;
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: none;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+
+.chall {
+border: 3px solid black;
+}

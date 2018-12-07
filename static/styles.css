@@ -22,6 +22,7 @@ nav .navbar-brand .green
     color: #2e944b;
 }
 
+
 main .form-control
 {
     /* center form controls */
@@ -45,3 +46,5 @@ main img
     /* constrain images on small screens */
     max-width: 100%;
 }
+
+

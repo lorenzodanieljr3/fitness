@@ -1,4 +1,5 @@
 import os
+import csv
 
 from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
@@ -54,77 +55,86 @@ def index():
         # line["name"] = name
 
     # Render portfolio
-        return render_template("index.html")
+        return render_template("home.html")
+
+@app.route("/home")
+@login_required
+def home():
+    """Show homepage"""
+
+    return render_template("home.html")
 
 
-# @app.route("/buy", methods=["GET", "POST"])
+@app.route("/gyms", methods=["GET", "POST"])
+@login_required
+def gyms():
+    googlemap = "https://www.google.com/maps/embed/v1/search?q=gyms%20near%20dallas&key=AIzaSyBe1qKb3dtLyIWxdHPgftdhBZi84Cd5EyI"
+
+    if request.method == "POST":
+        city=request.form.get("city")
+        googlemap = googlemap.replace("dallas", str(city))
+
+    return render_template("gyms.html", googlemap=googlemap)
+
+@app.route("/guide")
+@login_required
+def guide():
+    """Show workout tips, guide, diet, meal plans"""
+
+    return render_template("guide.html")
+
+
+@app.route("/profile", methods=["GET","POST"])
+@login_required
+def profile():
+    """Show profile"""
+    if request.method == "GET":
+        return render_template("profile.html")
+
+    if request.method == "POST":
+        return render_template("workout1.html")
+
+
+@app.route("/challenge")
+@login_required
+def challenge():
+    """Show challenges"""
+
+    return render_template("challenge.html")
+
+# @app.route("/calories")
 # @login_required
-# def buy():
-#     """Buy shares of stock"""
-#     if request.method == "POST":
-#         # check if valid input
-#         try:
-#             symbol = lookup(request.form.get("symbol"))
-#             shares = int(request.form.get("shares"))
-#         except:
-#             return apology("enter some input")
+# def calories():
+#     """Calorie Calculator"""
 
-#         # if symbol is empty return apology
-#         if not symbol:
-#             return apology("enter a valid symbol")
+#     return render_template("calories.html")
 
-#         # if shares is empty
-#         if not shares or shares <= 0:
-#             return apology("enter the quantity of shares")
+@app.route("/workout")
+@login_required
+def workout():
+    return render_template("workout.html")
 
-#         # if can't afford to buy then error
-#         # get cash from db
-#         total_amount = (shares) * symbol["price"]
-#         current_user_amount = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
-#         remainder = current_user_amount[0]["cash"] - total_amount
-#         typeoftransaction = "BUY"
-
-#         if remainder < 0:
-#             return apology("Not enough money")
-#         else:
-#             db.execute("UPDATE users SET cash = :remainder WHERE id = :id", id=session["user_id"], remainder=remainder)
-
-#             db.execute("""INSERT INTO purchases (purchaser, symbol, shares, price_of_stock, total_purchase_price, typeoftransaction)
-#                 VALUES(:purchaser, :symbol, :shares, :price_of_stock, :total_purchase_price, :typeoftransaction)""",
-#                       purchaser=session["user_id"], symbol=symbol["symbol"], shares=shares, price_of_stock=symbol["price"], total_purchase_price=total_amount, typeoftransaction=typeoftransaction)
-
-#         flash("Bought!")
-
-#         return redirect(url_for("index"))
-
-#     else:
-#         return render_template("buy.html")
+@app.route("/workout1")
+@login_required
+def workout1():
+    return render_template("workout1.html")
 
 
-# @app.route("/check", methods=["GET"])
-# def check():
-#     """Return true if username available, else false, in JSON format"""
-#     check = request.args.get("username")
-#     look = db.execute("SELECT * FROM users WHERE username =:current", current=check)
-#     if not len(check) or look:
-#         return jsonify(False)
-#     else:
-#         return jsonify(True)
+@app.route("/workout2")
+@login_required
+def workout2():
+    return render_template("workout2.html")
 
+@app.route("/workouta")
+@login_required
+def workouta():
+    return render_template("workouta.html")
 
-# @app.route("/history")
-# @login_required
-# def history():
-#     """Show history of transactions"""
+@app.route("/workoutb")
+@login_required
+def workoutb():
+    return render_template("workoutb.html")
 
-#     currentuser = session["user_id"]
-
-#     data = db.execute("SELECT * FROM purchases WHERE purchaser=:current", current=currentuser)
-
-#     for line in data:
-#         line["price"] = usd(line["price_of_stock"])
-
-#     return render_template("history.html", data=data)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -157,7 +167,7 @@ def login():
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect("/home")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -174,20 +184,6 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-
-@app.route("/quote", methods=["GET", "POST"])
-@login_required
-def quote():
-    """Get stock quote."""
-    if request.method == "POST":
-        quote = lookup(request.form.get("symbol"))
-        if not quote:
-            return apology("stock not found")
-        else:
-            quote['price'] = usd(quote['price'])
-            return render_template("quote.html", quote=quote)
-    else:
-        return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -224,93 +220,30 @@ def register():
         # store their id in session to log them in automatically
         user_id = db.execute("SELECT id FROM users WHERE username = :username", username=request.form.get("username"))
         session["user_id"] = user_id[0]["id"]
-        return redirect("workout.html")
+        return redirect("/")
 
     else:
         return render_template("register.html")
 
-
-@app.route("/sell", methods=["GET", "POST"])
-@login_required
-def sell():
-    """Sell shares of stock"""
-
-    user = session["user_id"]
-    data = db.execute("SELECT symbol FROM purchases WHERE purchaser=:current", current=user)
-    seller = set(val for dic in data for val in dic.values())
-
-    for line in seller:
-        line
-
-    if request.method == "POST":
-
-        symbol = lookup(request.form.get("symbol"))
-        typeoftransaction = "SELL"
-
-        if (symbol) == None:
-            return apology("No such symbol")
-
-        # Check if shares was a positive integer
-        try:
-            shares = int(request.form.get("shares"))
-        except:
-            return apology("shares must be a positive integer", 400)
-
-            # Check if # of shares requested was 0
-        if shares <= 0:
-            return apology("can't sell less than or 0 shares", 400)
-
-        currentuser = session["user_id"]
-
-        stock = db.execute("SELECT SUM(shares) as total_shares FROM purchases WHERE purchaser= :current AND symbol = :symbol GROUP BY symbol",
-                           current=currentuser, symbol=request.form.get("symbol"))
-
-        if len(stock) != 1 or stock[0]["total_shares"] <= 0 or stock[0]["total_shares"] < shares:
-            return apology("you can't sell less than 0 or more than you own", 400)
-
-        rows = db.execute("SELECT cash FROM users WHERE id = :current", current=currentuser)
-
-        # Calculate the price of requested shares
-        price_of_stock = symbol["price"]
-        total_price = price_of_stock * int(shares)
-
-        # Book keeping (TODO: should be wrapped with a transaction)
-        db.execute("UPDATE users SET cash = cash + :price WHERE id =:current", price=total_price, current=currentuser)
-        db.execute("INSERT INTO purchases (purchaser, symbol, shares, price_of_stock, typeoftransaction) VALUES(:purchaser, :symbol, :shares, :price_of_stock, :typeoftransaction)",
-                   purchaser=session["user_id"], symbol=symbol["symbol"], shares=-shares, price_of_stock=symbol["price"], typeoftransaction=typeoftransaction)
-
-        flash("Sold!")
-
-        return redirect(url_for("index"))
-    else:
-        return render_template("sell.html", seller=seller)
+@app.route("/form", methods=["GET"])
+def get_form():
+    return render_template("workout.html")
 
 
-@app.route("/loan", methods=["GET", "POST"])
-@login_required
-def loan():
-    """Get a loan."""
+@app.route("/form", methods=["POST"])
+def post_form():
 
-    if request.method == "POST":
-
-        # ensure must be integers
-        try:
-            loan = int(request.form.get("loan"))
-            if loan < 0:
-                return apology("Loan must be positive amount")
-            elif loan > 1000:
-                return apology("Cannot loan more than $1,000 at once")
-        except:
-            return apology("Loan must be positive integer")
-
-        currentuser = session["user_id"]
-        # update user cash (increase)
-        db.execute("UPDATE users SET cash = cash + :loan WHERE id = :current", loan=loan, current=currentuser)
-
-        flash("Success!")
-
-        return redirect(url_for("index"))
-    else:
-        return render_template("loan.html")
+    # Open csv file and write information from the form into the sheet
+    with open("workoutlog.csv", "a") as file:
+        data = csv.writer(file)
+        data.writerow((request.form.get("name"), request.form.get("type"), request.form.get("distance"), request.form.get("duration"), request.form.get("time")))
+    return redirect("/log")
 
 
+@app.route("/log", methods=["GET"])
+def get_sheet():
+    # Open sheet with table from sheet.html
+    with open("workoutlog.csv", "r") as file:
+        read = csv.reader(file)
+        athletes = list(read)
+    return render_template("log.html", athletes=athletes)
